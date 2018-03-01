@@ -151,11 +151,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DistanceMatrixApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Exceptions\StatusException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IDistanceMatrixApiOptionsModel.cs" />
+    <Compile Include="Models\DistanceMatrixApiOptionsModel.cs" />
+    <Compile Include="Models\DistanceMatrixApiResponseModel.cs" />
+    <Compile Include="Interfaces\IGeoInfoModel.cs" />
+    <Compile Include="Models\GeoInfoModel.cs" />
+    <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,12 +200,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\DistanceMatrixApi\Index.cshtml" />
+    <Content Include="Views\DistanceMatrixApi\DisplayData.cshtml" />
+    <Content Include="Views\DistanceMatrixApi\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

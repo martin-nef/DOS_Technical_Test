@@ -1,0 +1,35 @@
+﻿@using DOS_Technical_Test.Interfaces
+@model IGeoInfoModel
+<table class="table">
+    @* If the request was fully successful, display all the required info, otherwise show what happened. *@
+    <tr>
+        <td><b>Origin</b></td>
+        <td><b>Destination</b></td>
+        <td><b>Distance</b></td>
+        <td><b>Duration</b></td>
+    </tr>   
+    <tr>
+        <td>@Model.Origin</td>
+        <td>@Model.Destination</td>
+        <td>@Model.ReadableDistance</td>
+        <td>@Model.ReadableDuration</td>
+    </tr>
+</table>
+
+@* Show status when something goes wrong, but only if there is a status to display. *@
+<table class="table">
+    @{if (ViewBag.RequestSuccess != true)
+    {
+        if (@ViewBag.RequestStatus != null)
+        {
+            <tr>
+                <td><b>Status</b></td>
+            </tr>
+            <tr>
+                <td>@ViewBag.RequestStatus</td>
+            </tr>
+        }
+    }}
+</table>
+
+<p>@Html.ActionLink("Back", "Index", new { controller = "DistanceMatrixApi" }, new { @class = "btn btn-primary btn-lg" })</p>

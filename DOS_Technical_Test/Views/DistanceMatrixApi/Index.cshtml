@@ -1,0 +1,31 @@
+@using DOS_Technical_Test.Interfaces
+@model IGeoInfoModel
+@using (Html.BeginForm("RequestData", "DistanceMatrixApi", FormMethod.Post, new { @class = "" }))
+{
+    @* Display a message to the user, if any. *@
+    if (ViewBag.Feedback != null)
+    {
+        <tr class="row">
+            <td>@ViewBag.Feedback</td>
+        </tr>
+    }
+    <table class="table">
+        <tr class="row">
+            <td><b>Origin address</b></td>
+            <td width="10" />
+            <td><b>Destination address</b></td>
+        </tr>
+        <tr class="row">
+            <td class="col">@Html.TextAreaFor(m => m.Origin)</td>
+            <td width="10" />
+            <td class="col">@Html.TextAreaFor(m => m.Destination)</td>
+        </tr>
+    </table>
+    <table>
+        <tr class="row">
+            <td>@Html.ActionLink("Settings", "Settings", new { controller = "DistanceMatrixApi" }, new { @class = "btn btn-primary btn-lg" })</td>
+            <td width="10" />
+            <td><input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary btn-lg" /></td>
+        </tr>
+    </table>
+}

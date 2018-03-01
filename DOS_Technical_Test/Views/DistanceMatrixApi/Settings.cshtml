@@ -1,0 +1,137 @@
+﻿@using DOS_Technical_Test.Interfaces
+@model IDistanceMatrixApiOptionsModel
+@{
+    // Create a list of selectable items to fill transit mode drop down.
+    IEnumerable<SelectListItem> modeSelect = new SelectListItem[]
+    {
+        new SelectListItem { Text = "Driving", Value = "driving" },
+        new SelectListItem { Text = "Public Transit", Value = "driving" },
+        new SelectListItem { Text = "Cycling", Value = "bicycling" },
+        new SelectListItem { Text = "Walking", Value = "walking" }
+    };
+
+    // Select the option that is currently chosen.
+    foreach (SelectListItem item in modeSelect)
+    {
+        if (item.Value == Model.previousMode)
+        {
+            item.Selected = true;
+            break;
+        }
+    }
+
+    // Create a list of selectable items to fill unit drop down.
+    IEnumerable<SelectListItem> unitSelect = new SelectListItem[]
+    {
+        new SelectListItem { Text = "Metric", Value = "metric", Selected = true },
+        new SelectListItem { Text = "Imperial", Value = "imperial" }
+    };
+
+    // Select the option that is currently chosen.
+    foreach (SelectListItem item in unitSelect)
+    {
+        if (item.Value == Model.previousUnits)
+        {
+            item.Selected = true;
+            break;
+        }
+    }
+
+    // Create a list of selectable items to fill language drop down.
+    IEnumerable<SelectListItem> languageSelect = new SelectListItem[]
+    {
+        new SelectListItem { Value = "ar",  Text = "Arabic" },
+        new SelectListItem { Value = "bg",  Text = "Bulgarian" },
+        new SelectListItem { Value = "bn",  Text = "Bengali" },
+        new SelectListItem { Value = "ca",  Text = "Catalan" },
+        new SelectListItem { Value = "cs",  Text = "Czech" },
+        new SelectListItem { Value = "da",  Text = "Danish" },
+        new SelectListItem { Value = "de",  Text = "German" },
+        new SelectListItem { Value = "el",  Text = "Greek" },
+        new SelectListItem { Value = "en",  Text = "English" },
+        new SelectListItem { Value = "en-AU",   Text = "English (Australian)" },
+        new SelectListItem { Value = "en-GB",   Text = "English (Great Britain)" },
+        new SelectListItem { Value = "es",  Text = "Spanish" },
+        new SelectListItem { Value = "eu",  Text = "Basque" },
+        new SelectListItem { Value = "eu",  Text = "Basque" },
+        new SelectListItem { Value = "fa",  Text = "Farsi" },
+        new SelectListItem { Value = "fi",  Text = "Finnish" },
+        new SelectListItem { Value = "fil", Text = "Filipino" },
+        new SelectListItem { Value = "fr",  Text = "French" },
+        new SelectListItem { Value = "gl",  Text = "Galician" },
+        new SelectListItem { Value = "gu",  Text = "Gujarati" },
+        new SelectListItem { Value = "hi",  Text = "Hindi" },
+        new SelectListItem { Value = "hr",  Text = "Croatian" },
+        new SelectListItem { Value = "hu",  Text = "Hungarian" },
+        new SelectListItem { Value = "id",  Text = "Indonesian" },
+        new SelectListItem { Value = "it",  Text = "Italian" },
+        new SelectListItem { Value = "iw",  Text = "Hebrew" },
+        new SelectListItem { Value = "ja",  Text = "Japanese" },
+        new SelectListItem { Value = "kn",  Text = "Kannada" },
+        new SelectListItem { Value = "ko",  Text = "Korean" },
+        new SelectListItem { Value = "lt",  Text = "Lithuanian" },
+        new SelectListItem { Value = "lv",  Text = "Latvian" },
+        new SelectListItem { Value = "ml",  Text = "Malayalam" },
+        new SelectListItem { Value = "mr",  Text = "Marathi" },
+        new SelectListItem { Value = "nl",  Text = "Dutch" },
+        new SelectListItem { Value = "no",  Text = "Norwegian" },
+        new SelectListItem { Value = "pl",  Text = "Polish" },
+        new SelectListItem { Value = "pt",  Text = "Portuguese" },
+        new SelectListItem { Value = "pt-BR",   Text = "Portuguese (Brazil)" },
+        new SelectListItem { Value = "pt-PT",   Text = "Portuguese (Portugal)" },
+        new SelectListItem { Value = "ro",  Text = "Romanian" },
+        new SelectListItem { Value = "ru",  Text = "Russian" },
+        new SelectListItem { Value = "sk",  Text = "Slovak" },
+        new SelectListItem { Value = "sl",  Text = "Slovenian" },
+        new SelectListItem { Value = "sr",  Text = "Serbian" },
+        new SelectListItem { Value = "sv",  Text = "Swedish" },
+        new SelectListItem { Value = "ta",  Text = "Tamil" },
+        new SelectListItem { Value = "te",  Text = "Telugu" },
+        new SelectListItem { Value = "th",  Text = "Thai" },
+        new SelectListItem { Value = "tl",  Text = "Tagalog" },
+        new SelectListItem { Value = "tr",  Text = "Turkish" },
+        new SelectListItem { Value = "uk",  Text = "Ukrainian" },
+        new SelectListItem { Value = "vi",  Text = "Vietnamese" },
+        new SelectListItem { Value = "zh-CN",   Text = "Chinese (Simplified)" },
+        new SelectListItem { Value = "zh-TW",   Text = "Chinese (Traditional)" }
+    };
+
+    // Select the option that is currently chosen.
+    foreach (SelectListItem item in languageSelect)
+    {
+        if (item.Value == Model.previousLanguage)
+        {
+            item.Selected = true;
+            break;
+        }
+    }
+}
+
+@* Create a submission form to update settings. *@
+@using (Html.BeginForm("UpdateSettings", "DistanceMatrixApi", FormMethod.Post, new { @class = "" }))
+{
+    <table class="table" >
+        <tr class="row">
+            <td><b>API Key</b></td>
+            <td><b>Language</b></td>
+        </tr>
+        <tr class="row">
+            <td class="col">@Html.TextBoxFor(m => m.ApiKey, new { Value = Model.previousApiKey })</td>
+            <td class="col">@Html.DropDownListFor(m => m.Language, languageSelect)</td>
+        </tr>
+        <tr class="row">
+            <td><b>Mode</b></td>
+            <td><b>Units</b></td>
+        </tr>
+        <tr class="row">
+            <td class="col">@Html.DropDownListFor(m => m.Mode, modeSelect)</td>
+            <td class="col">@Html.DropDownListFor(m => m.Units, unitSelect)</td>
+        </tr>
+    </table>
+    <table>
+        <tr class="row">
+            <td>@Html.ActionLink("Cancel", "Index", new { controller = "DistanceMatrixApi" }, new { @class = "btn btn-primary btn-lg" })</td>
+            <td><input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary btn-lg" /></td>
+        </tr>
+    </table>
+}
