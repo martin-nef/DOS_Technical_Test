@@ -96,7 +96,7 @@ namespace DOS_Technical_Test.Controllers
 
                 string url = ConstructRequestString(new[] { model.Origin }, new[] { model.Destination });
 
-                string jsonString;
+                string jsonString = string.Empty;
                 try
                 {
                     jsonString = client.DownloadString(url);
